@@ -1,0 +1,8 @@
+entite\Categorie.class
+entite\Employe.class
+entite\Produit.class
+com\mycompany\boutique\Boutique.class
+entite\ProduitAchete.class
+entite\Client.class
+entite\Personne.class
+entite\Achat.class
