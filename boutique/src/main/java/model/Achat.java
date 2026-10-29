@@ -6,7 +6,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Achat implements Serializable{
     
     private long id;
-    private Date dateAchat;
+    private LocalDate dateAchat;
     private double remise;
     private Client client;
     private Employe employe;
@@ -27,7 +27,7 @@ public class Achat implements Serializable{
         
     }
     
-    public Achat(long id, Date dateAchat, double remise, Client client, Employe employe, List<ProduitAchete> produitAchetes) {
+    public Achat(long id, LocalDate dateAchat, double remise, Client client, Employe employe, List<ProduitAchete> produitAchetes) {
         this.id = id;
         this.dateAchat = dateAchat;
         this.remise = remise;
@@ -38,28 +38,52 @@ public class Achat implements Serializable{
         }
     }
     
-    private long getId() {
+    public long getId() {
         return id;
     }
     
-    private Date getDateAchat() {
+    public LocalDate getDateAchat() {
         return dateAchat;
     }
     
-    private double getRemise() {
+    public double getRemise() {
         return remise;
     }
     
-    private Client getClient() {
+    public Client getClient() {
         return client;
     }
     
-    private Employe getEmploye() {
+    public Employe getEmploye() {
         return employe;
     }
     
-    private List<ProduitAchete> getProduitAchetes() {
+    public List<ProduitAchete> getProduitAchetes() {
         return produitAchetes;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public void setDateAchat(LocalDate dateAchat) {
+        this.dateAchat = dateAchat;
+    }
+    
+    public void setRemise(Double remise) {
+        this.remise = remise;
+    }
+    
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
+    }
+    
+    public void setProduitsAchetes(List<ProduitAchete> produitAchetes) {
+        this.produitAchetes = produitAchetes;
+    }
+    
+    public void setClient(Client client) {
+        this.client = client;
     }
     
     public double getRemiseTotal() {
