@@ -53,7 +53,9 @@ public abstract class Personne implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        int hash = 3;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
     }
 
     @Override

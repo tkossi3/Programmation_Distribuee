@@ -79,10 +79,12 @@ public class Produit implements Serializable {
     public boolean estPerime(LocalDate dateReference) {
         return dateReference.isAfter(this.datePeremtion);
     }
-    
+
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        int hash = 3;
+        hash = 23 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
     }
 
     @Override

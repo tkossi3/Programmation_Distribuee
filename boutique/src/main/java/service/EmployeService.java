@@ -75,10 +75,8 @@ public class EmployeService {
         return sum;
     }
     
-    public void lister() {
-        for (Employe em : listesEmployes) {
-            System.out.println(em);
-        }
+    public List<Employe> lister() {
+        return listesEmployes;
     }
     
 }

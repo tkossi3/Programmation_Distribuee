@@ -73,10 +73,8 @@ public class ClientService {
         return sum;
     }
     
-    public void lister() {
-        for (Client cl : listesClients) {
-            System.out.println(cl);
-        }
+    public List<Client> lister() {
+        return listesClients;
     }
     
 }

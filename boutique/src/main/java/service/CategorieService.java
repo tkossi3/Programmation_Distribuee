@@ -71,13 +71,11 @@ public class CategorieService {
         for (Categorie c : listesCategories) {
             sum += 1;
         }
-        return sum;
+        return listesCategories.size();
     }
     
-    public void lister() {
-        for (Categorie c : listesCategories) {
-            System.out.println(c);
-        }
+    public List<Categorie> lister() {
+        return listesCategories;
     }
     
 }

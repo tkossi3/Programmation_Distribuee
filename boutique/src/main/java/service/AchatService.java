@@ -4,7 +4,7 @@
  */
 package service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Achat;
@@ -37,7 +37,7 @@ public class AchatService {
         listesAchats.add(achat);
     }
     
-    public Achat modifier(long id, LocalDate dateAchat, double remise, Client client, Employe employe, List<ProduitAchete> produitAchetes) {
+    public Achat modifier(long id, LocalDateTime dateAchat, double remise, Client client, Employe employe, List<ProduitAchete> produitAchetes) {
         Achat achat = trouver(id);
         if (achat != null) {
             achat.setDateAchat(dateAchat);
@@ -80,10 +80,8 @@ public class AchatService {
         return sum;
     }
     
-    public void lister() {
-        for (Achat ac : listesAchats) {
-            System.out.println(ac);
-        }
+    public List<Achat> lister() {
+        return listesAchats;
     }
     
 }

@@ -6,6 +6,7 @@ package service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import model.Categorie;
 import model.Produit;
@@ -20,13 +21,12 @@ public class ProduitService {
     private static ProduitService instance;
     
     private ProduitService() {
-        
+        this.listesProduits = new ArrayList<>();
     }
     
     public static synchronized ProduitService getInstance() {
         if (instance == null) {
             instance = new ProduitService();
-            listesProduits = new ArrayList<>();
         }
         return instance;
     }
@@ -46,6 +46,16 @@ public class ProduitService {
         return produit;
     }
     
+    public void modifier(Produit produit) {
+        if (produit != null) {
+            int index = this.listesProduits.indexOf(produit);
+            if (index != -1) {
+                this.listesProduits.set(index, produit);
+            }
+            System.out.println(produit);
+        }
+    }
+    
     public Produit trouver(long id) {
         Produit produit = new Produit();
         try {
@@ -62,7 +72,9 @@ public class ProduitService {
     
     public void supprimer(long id) {
         Produit produit = trouver(id);
-        listesProduits.remove(produit);
+        if (produit != null) {
+            listesProduits.remove(produit);
+        }
     }
     
     public void supprimer(Produit produit) {
@@ -74,21 +86,27 @@ public class ProduitService {
         for (Produit p : listesProduits) {
             sum += 1;
         }
-        return sum;
+        return listesProduits.size();
     }
     
-    public void lister() {
-        for (Produit p : listesProduits) {
-            System.out.println(p);
-        }
+//    public void lister() {
+//        for (Produit p : listesProduits) {
+//            System.out.println(p);
+//        }
+//    }
+    
+    public List<Produit> lister() {
+        return this.listesProduits;
     }
     
-    public void listerPerimes() {
+    public List<Produit> listerPerimes() {
+        List<Produit> listeProduitsPerimes = new LinkedList<>();
         for (Produit p : listesProduits) {
             if (p.estPerime()) {
-                System.out.println(p);
+                listeProduitsPerimes.add(p);
             }
         }
+        return listeProduitsPerimes;
     }
     
 }

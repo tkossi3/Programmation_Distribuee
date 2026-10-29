@@ -53,7 +53,9 @@ public class Categorie implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id);
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class Categorie implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
         final Categorie other = (Categorie) obj;

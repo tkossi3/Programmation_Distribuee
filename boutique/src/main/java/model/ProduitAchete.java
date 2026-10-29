@@ -5,6 +5,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -14,14 +15,24 @@ public class ProduitAchete implements Serializable {
     
     private double remise;
     private Produit produit;
+    private Achat achat;
     
     public ProduitAchete() {
         
     }
     
-    public ProduitAchete(double remise, Produit produit) {
+    public ProduitAchete(double remise, Produit produit, Achat achat) {
         this.remise = remise;
         this.produit = produit;
+        this.achat = achat;
+    }
+
+    public Achat getAchat() {
+        return achat;
+    }
+
+    public void setAchat(Achat achat) {
+        this.achat = achat;
     }
     
     public double getRemise() {
@@ -38,6 +49,32 @@ public class ProduitAchete implements Serializable {
     
     public void setProduit(Produit produit) {
         this.produit = produit;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 43 * hash + Objects.hashCode(this.produit);
+        hash = 43 * hash + Objects.hashCode(this.achat);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ProduitAchete other = (ProduitAchete) obj;
+        if (!Objects.equals(this.produit, other.produit)) {
+            return false;
+        }
+        return Objects.equals(this.achat, other.achat);
     }
 
     @Override
