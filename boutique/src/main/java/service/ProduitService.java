@@ -17,7 +17,7 @@ import model.Produit;
  */
 public class ProduitService {
     
-    private static List<Produit> listesProduits;
+    private List<Produit> listesProduits;
     private static ProduitService instance;
     
     private ProduitService() {
@@ -47,12 +47,16 @@ public class ProduitService {
     }
     
     public void modifier(Produit produit) {
-        if (produit != null) {
-            int index = this.listesProduits.indexOf(produit);
-            if (index != -1) {
-                this.listesProduits.set(index, produit);
+        try {
+            if (produit != null) {
+                int index = this.listesProduits.indexOf(produit);
+                if (index != -1) {
+                    this.listesProduits.set(index, produit);
+                }
+                System.out.println(produit);
             }
-            System.out.println(produit);
+        } catch (Exception ex) {
+            System.out.println("Produit non trouvé !");
         }
     }
     
@@ -82,10 +86,6 @@ public class ProduitService {
     }
     
     public int compter() {
-        int sum = 0;
-        for (Produit p : listesProduits) {
-            sum += 1;
-        }
         return listesProduits.size();
     }
     

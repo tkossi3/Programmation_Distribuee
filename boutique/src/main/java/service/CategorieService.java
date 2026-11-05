@@ -6,6 +6,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import model.Categorie;
 
 /**
@@ -14,17 +15,16 @@ import model.Categorie;
  */
 public class CategorieService {
     
-    private static List<Categorie> listesCategories;
+    private List<Categorie> listesCategories;
     private static CategorieService instance;
     
     private CategorieService() {
-        
+        listesCategories = new ArrayList<>();
     }
     
     public static synchronized CategorieService getInstance() {
         if (instance == null) {
             instance = new CategorieService();
-            listesCategories = new ArrayList<>();
         }
         return instance;
     }
@@ -43,11 +43,25 @@ public class CategorieService {
         return categorie;
     }
     
+    public void modifier(Categorie categorie) {
+        try {
+            if (categorie != null) {
+                int index = this.listesCategories.indexOf(categorie);
+                if (index != -1) {
+                    this.listesCategories.set(index, categorie);
+                }
+                System.out.println(categorie);
+            }
+        } catch (Exception ex) {
+            System.out.println("Categorie non trouvé !");
+        }
+    }
+    
     public Categorie trouver(Integer id) {
         Categorie categorie = new Categorie();
         try {
             for (Categorie c : listesCategories) {
-                if (c.getID()== id) {
+                if (Objects.equals(c.getID(), id)) {
                     categorie = c;
                 }
             }
@@ -67,10 +81,6 @@ public class CategorieService {
     }
     
     public int compter() {
-        int sum = 0;
-        for (Categorie c : listesCategories) {
-            sum += 1;
-        }
         return listesCategories.size();
     }
     

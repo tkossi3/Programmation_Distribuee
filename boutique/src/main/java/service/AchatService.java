@@ -18,17 +18,16 @@ import model.ProduitAchete;
  */
 public class AchatService {
     
-    private static List<Achat> listesAchats;
+    private List<Achat> listesAchats;
     private static AchatService instance;
     
     private AchatService() {
-        
+        this.listesAchats = new ArrayList<>();
     }
     
     public static synchronized AchatService getInstance() {
         if (instance == null) {
             instance = new AchatService();
-            listesAchats = new ArrayList<>();
         }
         return instance;
     }
@@ -47,6 +46,20 @@ public class AchatService {
             achat.setProduitsAchetes(produitAchetes);
         }
         return achat;
+    }
+    
+    public void modifier(Achat achat) {
+        try {
+            if (achat != null) {
+                int index = this.listesAchats.indexOf(achat);
+                if (index != -1) {
+                    this.listesAchats.set(index, achat);
+                }
+                System.out.println(achat);
+            }
+        } catch (Exception ex) {
+            System.out.println("Achat non trouvé !");
+        }
     }
     
     public Achat trouver(long id) {
@@ -73,11 +86,7 @@ public class AchatService {
     }
     
     public int compter() {
-        int sum = 0;
-        for (Achat ac : listesAchats) {
-            sum += 1;
-        }
-        return sum;
+        return listesAchats.size();
     }
     
     public List<Achat> lister() {

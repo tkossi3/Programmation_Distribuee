@@ -14,17 +14,16 @@ import model.Client;
  */
 public class ClientService {
     
-    private static List<Client> listesClients;
+    private List<Client> listesClients;
     private static ClientService instance;
     
     private ClientService() {
-        
+        this.listesClients = new ArrayList<>();
     }
     
     public static synchronized ClientService getInstance() {
         if (instance == null) {
             instance = new ClientService();
-            listesClients = new ArrayList<>();
         }
         return instance;
     }
@@ -40,6 +39,20 @@ public class ClientService {
             client.setPrenom(prenom);
         }
         return client;
+    }
+    
+    public void modifier(Client client) {
+        try {
+            if (client != null) {
+                int index = this.listesClients.indexOf(client);
+                if (index != -1) {
+                    this.listesClients.set(index, client);
+                }
+                System.out.println(client);
+            }
+        } catch (Exception ex) {
+            System.out.println("Client non trouvé !");
+        }
     }
     
     public Client trouver(long id) {
@@ -66,11 +79,7 @@ public class ClientService {
     }
     
     public int compter() {
-        int sum = 0;
-        for (Client cl : listesClients) {
-            sum += 1;
-        }
-        return sum;
+        return listesClients.size();
     }
     
     public List<Client> lister() {

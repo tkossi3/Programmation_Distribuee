@@ -15,17 +15,16 @@ import model.Employe;
  */
 public class EmployeService {
     
-    private static List<Employe> listesEmployes;
+    private List<Employe> listesEmployes;
     private static EmployeService instance;
     
     private EmployeService() {
-        
+        this.listesEmployes = new ArrayList<>();
     }
     
     public static synchronized EmployeService getInstance() {
         if (instance == null) {
             instance = new EmployeService();
-            listesEmployes = new ArrayList<>();
         }
         return instance;
     }
@@ -44,6 +43,20 @@ public class EmployeService {
         return employe;
     }
     
+    public void modifier(Employe employe) {
+        try {
+            if (employe != null) {
+                int index = this.listesEmployes.indexOf(employe);
+                if (index != -1) {
+                    this.listesEmployes.set(index, employe);
+                }
+                System.out.println(employe);
+            }
+        } catch (Exception ex) {
+            System.out.println("Employe non trouvé !");
+        }
+    }
+    
     public Employe trouver(long id) {
         Employe employe = new Employe();
         try {
@@ -60,23 +73,19 @@ public class EmployeService {
     
     public void supprimer(long id) {
         Employe employe = trouver(id);
-        listesEmployes.remove(employe);
+        this.listesEmployes.remove(employe);
     }
     
     public void supprimer(Employe employe) {
-        listesEmployes.remove(employe);
+        this.listesEmployes.remove(employe);
     }
     
     public int compter() {
-        int sum = 0;
-        for (Employe em : listesEmployes) {
-            sum += 1;
-        }
-        return sum;
+        return listesEmployes.size();
     }
     
     public List<Employe> lister() {
-        return listesEmployes;
+        return this.listesEmployes;
     }
     
 }
