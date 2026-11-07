@@ -73,11 +73,15 @@ public class EmployeService {
     
     public void supprimer(long id) {
         Employe employe = trouver(id);
-        this.listesEmployes.remove(employe);
+        if (employe != null && this.listesEmployes.contains(employe)) {
+            this.listesEmployes.remove(employe);
+        }
     }
     
     public void supprimer(Employe employe) {
-        this.listesEmployes.remove(employe);
+        if (this.listesEmployes.contains(employe)) {
+            this.listesEmployes.remove(employe);
+        }
     }
     
     public int compter() {

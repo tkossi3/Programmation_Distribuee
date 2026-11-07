@@ -73,11 +73,15 @@ public class CategorieService {
     
     public void supprimer(Integer id) {
         Categorie categorie = trouver(id);
-        listesCategories.remove(categorie);
+        if (categorie != null && this.listesCategories.contains(categorie)) {
+            listesCategories.remove(categorie);
+        }
     }
     
     public void supprimer(Categorie categorie) {
-        listesCategories.remove(categorie);
+        if (this.listesCategories.contains(categorie)) {
+            listesCategories.remove(categorie);
+        }
     }
     
     public int compter() {

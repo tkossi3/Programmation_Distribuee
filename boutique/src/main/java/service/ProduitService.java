@@ -76,7 +76,7 @@ public class ProduitService {
     
     public void supprimer(long id) {
         Produit produit = trouver(id);
-        if (produit != null || this.listesProduits.contains(produit)) {
+        if (produit != null && this.listesProduits.contains(produit)) {
             listesProduits.remove(produit);
         }
     }

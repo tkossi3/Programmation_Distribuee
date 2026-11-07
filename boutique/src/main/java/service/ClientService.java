@@ -71,11 +71,15 @@ public class ClientService {
     
     public void supprimer(long id) {
         Client client = trouver(id);
-        listesClients.remove(client);
+        if (client != null && this.listesClients.contains(client)) {
+            listesClients.remove(client);
+        }
     }
     
     public void supprimer(Client client) {
-        listesClients.remove(client);
+        if (this.listesClients.contains(client)) {
+            listesClients.remove(client);
+        }
     }
     
     public int compter() {

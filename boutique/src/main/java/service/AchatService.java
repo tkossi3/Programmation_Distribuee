@@ -78,11 +78,15 @@ public class AchatService {
     
     public void supprimer(long id) {
         Achat achat = trouver(id);
-        listesAchats.remove(achat);
+        if (achat != null && this.listesAchats.contains(achat)) {
+            listesAchats.remove(achat);
+        }
     }
     
     public void supprimer(Achat achat) {
-        listesAchats.remove(achat);
+        if (this.listesAchats.contains(achat)) {
+            listesAchats.remove(achat);
+        }
     }
     
     public int compter() {
