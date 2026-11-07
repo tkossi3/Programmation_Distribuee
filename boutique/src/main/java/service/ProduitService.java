@@ -76,13 +76,15 @@ public class ProduitService {
     
     public void supprimer(long id) {
         Produit produit = trouver(id);
-        if (produit != null) {
+        if (produit != null || this.listesProduits.contains(produit)) {
             listesProduits.remove(produit);
         }
     }
     
     public void supprimer(Produit produit) {
-        listesProduits.remove(produit);
+        if (this.listesProduits.contains(produit)) {
+            listesProduits.remove(produit);
+        }
     }
     
     public int compter() {
