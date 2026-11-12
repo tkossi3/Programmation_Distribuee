@@ -18,6 +18,7 @@ public class Boutique {
         System.out.println("Hello World!");
         
         CategorieService categorie = CategorieService.getInstance();
+        Categorie categ = new Categorie();
         Categorie cat = new Categorie(1, "Fruits", "Les belles fruits.");
         Categorie cat2 = new Categorie(2, "Legumes", "Les légumes du champs.");
         
@@ -25,7 +26,7 @@ public class Boutique {
         categorie.ajouter(cat);
         categorie.ajouter(cat2);
         System.out.println("Categorie compte " + categorie.compter() + " élement(s).");
-        categorie.lister();
+        System.out.println(categorie.lister());
         categorie.supprimer(cat2);
         categorie.lister();
     }

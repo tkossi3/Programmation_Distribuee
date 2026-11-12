@@ -4,11 +4,10 @@
  */
 package service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import model.Categorie;
+import model.Achat;
+import model.Produit;
 import model.ProduitAchete;
 
 /**
@@ -31,6 +30,13 @@ public class ProduitAcheteService {
         return instance;
     }
     
+    public ProduitAchete creerProduitAchete(long idProduit, long idAchat, double remise){
+        Produit produit =  ProduitService.getInstance().trouver(idProduit);
+        Achat achat = AchatService.getInstance().trouver(idAchat);
+        ProduitAchete produitAchete = new ProduitAchete(remise, produit, achat);
+        return produitAchete;
+    }
+    
     public void ajouter(ProduitAchete produitAchete) {
         listesProduitAchetes.add(produitAchete);
     }
@@ -49,11 +55,11 @@ public class ProduitAcheteService {
         }
     }
     
-    public ProduitAchete trouver(long id) {
+    public ProduitAchete trouver(long idProduit, long idAchat) {
         ProduitAchete produitAchete = new ProduitAchete();
         try {
             for (ProduitAchete p : listesProduitAchetes) {
-                if (p.getId() == id) {
+                if (p.getProduit().getId() == idProduit && p.getAchat().getId() == idAchat) {
                     produitAchete = p;
                 }
             }
@@ -63,8 +69,8 @@ public class ProduitAcheteService {
         return produitAchete;
     }
     
-    public void supprimer(long id) {
-        ProduitAchete produitAchete = trouver(id);
+    public void supprimer(long idProduit, long idAchat) {
+        ProduitAchete produitAchete = trouver(idProduit, idAchat);
         if (produitAchete != null && this.listesProduitAchetes.contains(produitAchete)) {
             listesProduitAchetes.remove(produitAchete);
         }
